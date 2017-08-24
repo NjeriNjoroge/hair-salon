@@ -14,6 +14,7 @@ public class Stylist{
     mName = name;
     mSpeciality = speciality;
     instances.add(this);
+    mId = instances.size();
   }
 
   //gets name attributes
@@ -29,5 +30,20 @@ public class Stylist{
   //returns all instances of Stylist created
   public static List<Stylist> all(){
     return instances;
+  }
+
+  //gets Stylist id
+  public int getId(){
+    return mId;
+  }
+
+  //clears all instances of stylist
+  public static void clear(){
+    instances.clear();
+  }
+
+  //locating Stylist with their assigned id
+  public static Stylist find(int id){
+    return instances.get(id - 1);
   }
 }

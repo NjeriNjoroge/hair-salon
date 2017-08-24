@@ -26,4 +26,28 @@ public void all_displaysAllInstancesOfStylist_array(){
   assertEquals(true, Stylist.all().contains(firstStylist));
 }
 
+//assiging and accessing stylist IDs
+@Test
+public void getId_locatesStylistWithId_thirdStylist(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  assertEquals(1, testStylist.getId());
+}
+
+//clearing previously created Stylis
+@Test
+public void clear_clearAllPreviousStylists_0(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  Stylist.clear();
+  assertEquals(Stylist.all().size(), 0);
+}
+
+//locating specific Stylists using their IDs
+@Test
+public void find_locatesStylistWithId_thirdStylist(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  Stylist firstStylist = new Stylist("Arya", "Shampooist");
+  Stylist secondStylist = new Stylist("Ken", "Barber");
+  assertEquals(Stylist.find(testStylist.getId()), testStylist);
+}
+
 }
