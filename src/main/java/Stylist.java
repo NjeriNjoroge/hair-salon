@@ -62,6 +62,7 @@ public void save(){
     .addParameter("name", this.name)
     .addParameter("speciality", this.speciality)
     .executeUpdate();
+    getKey();
   }
 }
 }
