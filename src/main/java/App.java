@@ -56,5 +56,15 @@ public class App {
             model.put("template", "templates/client-form.vtl");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
+
+//processes new Clients form submission
+          post("/clients", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            String Cname = request.queryParams("name");
+            int Cphone = Integer.parseInt(request.queryParams("phone"));
+            Client newClient = new Client(Cname, Cphone);
+            model.put("template", "templates/client-success.vtl");
+            return new ModelAndView(model, layout);
+          }, new VelocityTemplateEngine());
   }
 }
