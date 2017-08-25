@@ -1,20 +1,13 @@
 <h2>All clients</h2>
 
 #if ($clients)
-<table>
-<tr>
-<th>Name</th>
-  <th>Speciality</th>
-    </tr>
-  #foreach ($client in $clients)
-  <tr>
-    <td>$client.getName()</td>
-    <td>$client.getPhone()</td>
-</tr>
+  <ul>
+    #foreach ($client in $clients)
+      <li><a href="/clients/$client.fetchId()">$client.getName()</a></li>
     #end
-  </table>
+  </ul>
 #else
-<p>No client yet!</p>
+  <p>No clients!</p>
 #end
 
 <a href="/client/new">Add New client</a>

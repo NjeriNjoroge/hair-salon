@@ -1,4 +1,12 @@
-<h1>$stylist.getName()</h1>
-<h4>$stylist.getSpeciality()</h4>
+<h1>$stylist.getName() - $stylist.getSpeciality()</h1>
+<h4>Clients belonging to $stylist.getName()</h4>
 
+<ul>
+  #foreach($client in $stylist.getClient())
+   <li>$client.getName() - $client.getPhone()</li>
+  #end
+</ul>
+
+
+<a href="/stylists/$stylist.getId()/clients/new">Add a client</a>
 <a href="/stylists">All stylists</a>

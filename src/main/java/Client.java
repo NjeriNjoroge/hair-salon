@@ -33,7 +33,7 @@ public static List<Client> all(){
 }
 
 //gets client id
-public int getId(){
+public int fetchId(){
   return mId;
 }
 

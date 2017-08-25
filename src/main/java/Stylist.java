@@ -8,7 +8,7 @@ public class Stylist{
   private String mName;
   private String mSpeciality;
   private static List<Stylist> instances = new ArrayList<Stylist>();
-  private List<Client> mClients;
+  private List<Client> mClient;
 
   //Constructor
   public Stylist (String name, String speciality){
@@ -16,7 +16,7 @@ public class Stylist{
     mSpeciality = speciality;
     instances.add(this);
     mId = instances.size();
-    mClients = new ArrayList<Client>();
+    mClient = new ArrayList<Client>();
   }
 
   //gets name attributes
@@ -50,12 +50,12 @@ public class Stylist{
   }
 
 //makes sure Stylists instantiates with empty client List
-public List<Client> getClients(){
-  return mClients;
+public List<Client> getClient(){
+  return mClient;
 }
 
 //adding client to Stylist
 public void addClient(Client client){
-  mClients.add(client);
+  mClient.add(client);
 }
 }

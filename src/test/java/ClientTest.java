@@ -29,9 +29,9 @@ public class ClientTest{
 
 //assigning and accessing client IDs
     @Test
-    public void getId_locatesClientWithId_firstClient(){
+    public void fetchId_locatesClientWithId_firstClient(){
       Client firstClient = new Client("Jon Snow", 710123456);
-      assertEquals(1, firstClient.getId());
+      assertEquals(1, firstClient.fetchId());
     }
 
 //clearing previously created Client
@@ -48,6 +48,6 @@ public class ClientTest{
   public void find_locatesClientWithId_secondClient(){
     Client firstClient = new Client("Jon Snow", 710123456);
     Client secondClient = new Client("Ingrid", 710123456);
-    assertEquals(Client.find(secondClient.getId()), secondClient);
+    assertEquals(Client.find(secondClient.fetchId()), secondClient);
   }
 }
