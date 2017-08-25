@@ -4,49 +4,40 @@ import java.util.List;
 
 //class
 public class Stylist{
-  private int mId;
-  private String mName;
-  private String mSpeciality;
-  private static List<Stylist> instances = new ArrayList<Stylist>();
+  private int id;
+  private String name;
+  private String Speciality;
   private List<Client> mClient;
 
   //Constructor
   public Stylist (String name, String speciality){
-    mName = name;
-    mSpeciality = speciality;
-    instances.add(this);
-    mId = instances.size();
-    mClient = new ArrayList<Client>();
+    this.name = name;
+    this.speciality = speciality;
   }
 
   //gets name attributes
   public String getName(){
-    return mName;
+    return name;
   }
 
   //gets speciality attribute
   public String getSpeciality(){
-    return mSpeciality;
+    return speciality;
   }
 
   //returns all instances of Stylist created
   public static List<Stylist> all(){
-    return instances;
+
   }
 
   //gets Stylist id
   public int getId(){
-    return mId;
+    return id;
   }
 
-  //clears all instances of stylist
-  public static void clear(){
-    instances.clear();
-  }
-
-  //locating Stylist with their assigned id
+//locating Stylist with their assigned id
   public static Stylist find(int id){
-    return instances.get(id - 1);
+    
   }
 
 //makes sure Stylists instantiates with empty client List
