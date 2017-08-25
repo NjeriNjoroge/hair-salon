@@ -66,5 +66,13 @@ public class App {
             model.put("template", "templates/client-success.vtl");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
+
+//displays all clients
+      get("/clients", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("clients", Client.all());
+        model.put("template", "templates/clients.vtl");
+        return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine()); 
   }
 }
