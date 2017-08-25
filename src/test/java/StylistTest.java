@@ -45,11 +45,12 @@ public void all_displaysAllInstancesOfStylist_true(){
   assertEquals(true, Stylist.all().get(0).equals(firstStylist));
 }
 
-//assiging and accessing stylist IDs
+//accessing stylist IDs
 @Test
-public void getId_locatesStylistWithId_testStylist(){
+public void getId_stylistIsCreatedWithId_testStylist(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
-  assertEquals(1, testStylist.getId());
+  testStylist.save();
+  assertTrue(testStylist.getId() > 0);
 }
 
 //clearing previously created Stylis
@@ -98,6 +99,15 @@ public void save_returnsTrueIfNamesAretheSame(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
   testStylist.save();
   assertTrue(Stylist.all().get(0).equals(testStylist));
+}
+
+//assigns unique ids when saved to DB
+@Test
+public void save_assignsIdToStylistObject(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
+  Stylist savedStylist = Stylist.all().get(0);
+  assertEquals(testStylist.getId(), savedStylist.getId());
 }
 
 }
