@@ -28,7 +28,7 @@ public void all_displaysAllInstancesOfStylist_array(){
 
 //assiging and accessing stylist IDs
 @Test
-public void getId_locatesStylistWithId_thirdStylist(){
+public void getId_locatesStylistWithId_testStylist(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
   assertEquals(1, testStylist.getId());
 }
@@ -43,7 +43,7 @@ public void clear_clearAllPreviousStylists_0(){
 
 //locating specific Stylists using their IDs
 @Test
-public void find_locatesStylistWithId_thirdStylist(){
+public void find_locatesStylistWithId_testStylist(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
   Stylist firstStylist = new Stylist("Arya", "Shampooist");
   Stylist secondStylist = new Stylist("Ken", "Barber");
