@@ -50,4 +50,11 @@ public void find_locatesStylistWithId_testStylist(){
   assertEquals(Stylist.find(testStylist.getId()), testStylist);
 }
 
+//makes sure Stylists instantiates with empty client List
+  @Test
+public void getClients_initiallyReturnsEmptyList_ArrayList() {
+  Stylists.clear();
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  assertEquals(0, testStylist.getClients().size());
+}
 }

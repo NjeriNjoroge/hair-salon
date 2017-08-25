@@ -8,6 +8,7 @@ public class Stylist{
   private String mName;
   private String mSpeciality;
   private static List<Stylist> instances = new ArrayList<Stylist>();
+  private List<Client> mClients;
 
   //Constructor
   public Stylist (String name, String speciality){
@@ -15,6 +16,7 @@ public class Stylist{
     mSpeciality = speciality;
     instances.add(this);
     mId = instances.size();
+    mClients = new ArrayList<Clients>();
   }
 
   //gets name attributes
@@ -46,4 +48,9 @@ public class Stylist{
   public static Stylist find(int id){
     return instances.get(id - 1);
   }
+
+//
+public List<Client> getClients(){
+  return mClients;
+}
 }
