@@ -1,7 +1,24 @@
+import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
 public class StylistTest{
+
+  //telling the tests to use only this dedicated database
+  @Before
+public void setUp() {
+  DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", null, null);
+}
+
+//clearing the test database
+@After
+public void tearDown() {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "DELETE FROM stylists *;";
+    con.createQuery(sql).executeUpdate();
+  }
+}
+
 
   //instance of Stylist
 @Test
@@ -37,7 +54,6 @@ public void getId_locatesStylistWithId_testStylist(){
 @Test
 public void clear_clearAllPreviousStylists_0(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
-  Stylist.clear();
   assertEquals(Stylist.all().size(), 0);
 }
 
@@ -53,7 +69,6 @@ public void find_locatesStylistWithId_testStylist(){
 //makes sure Stylists instantiates with empty client List
   @Test
 public void getClients_initiallyReturnsEmptyList_ArrayList() {
-  Stylist.clear();
   Stylist testStylist = new Stylist("Sansa", "Loctician");
   assertEquals(0, testStylist.getClient().size());
 }
@@ -64,7 +79,6 @@ public void addClient_addsClientToStylist_true(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
   Client goodClient = new Client("Ingrid", 710123456);
   testStylist.addClient(goodClient);
-  //Client.clear();
   assertTrue(testStylist.getClient().contains(goodClient));
 }
 }
