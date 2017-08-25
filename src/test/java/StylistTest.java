@@ -53,8 +53,18 @@ public void find_locatesStylistWithId_testStylist(){
 //makes sure Stylists instantiates with empty client List
   @Test
 public void getClients_initiallyReturnsEmptyList_ArrayList() {
-  Stylists.clear();
+  Stylist.clear();
   Stylist testStylist = new Stylist("Sansa", "Loctician");
   assertEquals(0, testStylist.getClients().size());
+}
+
+//adding client to Stylist
+@Test
+public void addClient_addsClientToStylist_true(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  Client goodClient = new Client("Ingrid", 710123456);
+  testStylist.addClient(goodClient);
+  Client.clear();
+  assertTrue(testStylist.getClients().contains(goodClient));
 }
 }

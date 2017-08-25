@@ -16,7 +16,7 @@ public class Stylist{
     mSpeciality = speciality;
     instances.add(this);
     mId = instances.size();
-    mClients = new ArrayList<Clients>();
+    mClients = new ArrayList<Client>();
   }
 
   //gets name attributes
@@ -49,8 +49,13 @@ public class Stylist{
     return instances.get(id - 1);
   }
 
-//
+//makes sure Stylists instantiates with empty client List
 public List<Client> getClients(){
   return mClients;
+}
+
+//adding client to Stylist
+public void addClient(Client client){
+  mClients.add(client);
 }
 }
