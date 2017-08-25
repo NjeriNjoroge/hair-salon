@@ -1,20 +1,9 @@
-<h2>All Stylists</h2>
+<h2>All stylists</h2>
 
-#if ($stylists)
-<table>
-<tr>
-<th>Name</th>
-  <th>Speciality</th>
-    </tr>
+<ul>
   #foreach ($stylist in $stylists)
-  <tr>
-    <td>$stylist.getName()</td>
-    <td>$stylist.getSpeciality()</td>
-</tr>
+    <li><a href="/stylists/$stylist.getId()">$stylist.getName()</a></li>
     #end
-  </table>
-#else
-<p>No stylist created!</p>
-#end
+</ul>
 
 <a href="/stylist/new">Add New stylist</a>
