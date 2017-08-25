@@ -1,12 +1,13 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import org.sql2o.*;
 
 //class
 public class Stylist{
   private int id;
   private String name;
-  private String Speciality;
+  private String speciality;
   private List<Client> mClient;
 
   //Constructor
@@ -25,9 +26,12 @@ public class Stylist{
     return speciality;
   }
 
-  //returns all instances of Stylist created
+  //returns all database instances of Stylist created
   public static List<Stylist> all(){
-
+    String sql = "SELECT id, name, speciality FROM stylists";
+    try(Connection con = DB.sql2o.open()){
+      return con.createQuery(sql).executeAndFetch(Stylist.class);
+    }
   }
 
   //gets Stylist id
@@ -37,7 +41,7 @@ public class Stylist{
 
 //locating Stylist with their assigned id
   public static Stylist find(int id){
-    
+
   }
 
 //makes sure Stylists instantiates with empty client List
@@ -48,5 +52,16 @@ public List<Client> getClient(){
 //adding client to Stylist
 public void addClient(Client client){
   mClient.add(client);
+}
+
+//saving new instance of stylist to database
+public void save(){
+  try(Connection con = DB.sql2o.open()){
+    String sql = "INSERT INTO stylists (name, speciality) VALUES (:name, :speciality)";
+    con.createQuery(sql)
+    .addParameter("name", this.name)
+    .addParameter("speciality", this.speciality)
+    .executeUpdate();
+  }
 }
 }

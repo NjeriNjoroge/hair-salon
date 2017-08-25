@@ -36,11 +36,13 @@ public void name_returnsNameOfCreatedStylist_string(){
 
 //returns all new instances of Stylist
 @Test
-public void all_displaysAllInstancesOfStylist_array(){
+public void all_displaysAllInstancesOfStylist_true(){
   Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
   Stylist firstStylist = new Stylist("Arya", "Shampooist");
-  assertEquals(true, Stylist.all().contains(testStylist));
-  assertEquals(true, Stylist.all().contains(firstStylist));
+  firstStylist.save();
+  assertEquals(true, Stylist.all().get(0).equals(testStylist));
+  assertEquals(true, Stylist.all().get(0).equals(firstStylist));
 }
 
 //assiging and accessing stylist IDs
@@ -81,4 +83,21 @@ public void addClient_addsClientToStylist_true(){
   testStylist.addClient(goodClient);
   assertTrue(testStylist.getClient().contains(goodClient));
 }
+
+//comparing objects we retrieve from database by overriding equals()
+@Test
+public void equals_returnsTrueIfNamesAretheSame(){
+  Stylist testStylist = new Stylist("Arya", "Shampooist");
+  Stylist firstStylist = new Stylist("Arya", "Shampooist");
+  assertTrue(testStylist.equals(firstStylist));
+}
+
+//saves objects into database
+@Test
+public void save_returnsTrueIfNamesAretheSame(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
+  assertTrue(Stylist.all().get(0).equals(testStylist));
+}
+
 }
