@@ -34,10 +34,20 @@ public class App {
         }, new VelocityTemplateEngine());
 
 //displays the Stylist form
-      get("/stylists/new", (request, response) -> {
+      get("/stylist/new", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("template", "templates/stylist-form.vtl");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
+
+//creates new stylist when form is submitted
+        post("/stylist", (request, response) -> {
+          Map<String, Object> model = new HashMap<String, Object>();
+          String name = request.queryParams("name");
+          String speciality = request.queryParams("speciality");
+          Stylist newStylist = new Stylist(name, speciality);
+          model.put("template", "templates/success.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
   }
 }
