@@ -45,7 +45,7 @@ public boolean equals(Object otherClient){
     return false;
   } else {
     Client newClient = (Client) otherClient;
-    return this.getName().equals(newClient.getName());
+    return this.getName().equals(newClient.getName()) && this.fetchId() == newClient.fetchId();
   }
 }
 //
@@ -62,15 +62,23 @@ public int fetchId(){
 public void save() {
   try(Connection con = DB.sql2o.open()) {
     String sql = "INSERT INTO clients (name, phone) VALUES (:name, :phone)";
-    con.createQuery(sql)
+    this.id = (int) con.createQuery(sql, true)
     .addParameter("name", this.name)
     .addParameter("phone", this.phone)
-    .executeUpdate();
+    .executeUpdate()
+    .getKey();
   }
 }
 
 //locating Client with their assigned id
 public static Client find(int id){
-
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "SELECT * FROM clients where id=:id";
+    Client client = con.createQuery(sql)
+    .addParameter("id", id)
+    .executeAndFetchFirst(Client.class);
+    return client;
+  }
 }
+
 }

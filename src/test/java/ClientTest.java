@@ -64,11 +64,22 @@ public void save_savesIntoDatabase_true() {
     assertTrue(Client.all().get(0).equals(firstClient));
 }
 
+//making sure the id assigned in DB is the same as the same as the objects
+@Test
+public void save_assignsIdToObject(){
+  Client firstClient = new Client("Jon Snow", 710123456);
+  firstClient.save();
+  Client savedClient = Client.all().get(0);
+  assertEquals(firstClient.fetchId(), savedClient.fetchId());
+}
+
+
 //assigning and accessing client IDs
     @Test
     public void fetchId_locatesClientWithId_firstClient(){
       Client firstClient = new Client("Jon Snow", 710123456);
-      assertEquals(1, firstClient.fetchId());
+      firstClient.save();
+      assertTrue(firstClient.fetchId() > 0);
     }
 
 
