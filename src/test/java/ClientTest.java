@@ -91,4 +91,14 @@ public void save_assignsIdToObject(){
     secondClient.save();
     assertEquals(Client.find(secondClient.getId()), secondClient);
   }
+
+  //updating  client details
+  @Test
+  public void update_updatesClientDetails_true(){
+    Client myClient = new Client("grace", 7485934, 1);
+    myClient.save();
+    myClient.update("sansa", 123456);
+    assertEquals("sansa", Client.find(myClient.getId()).getName());
+  }
+
 }
