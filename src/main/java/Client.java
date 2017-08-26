@@ -58,6 +58,17 @@ public int fetchId(){
   return id;
 }
 
+//saving objects to DB
+public void save() {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "INSERT INTO clients (name, phone) VALUES (:name, :phone)";
+    con.createQuery(sql)
+    .addParameter("name", this.name)
+    .addParameter("phone", this.phone)
+    .executeUpdate();
+  }
+}
+
 //locating Client with their assigned id
 public static Client find(int id){
 

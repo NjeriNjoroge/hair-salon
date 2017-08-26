@@ -48,10 +48,21 @@ public void equals_returnsTrueIfNamesAretheSame(){
     @Test
     public void all_displaysAllClientInstances_array(){
       Client testClient = new Client("Ingrid", 710123456);
+      testClient.save();
       Client firstClient = new Client("Jon Snow", 710123456);
-      assertEquals(true, Client.all().contains(testClient));
-      assertEquals(true, Client.all().contains(firstClient));
+      firstClient.save();
+      assertEquals(true, Client.all().get(0).contains(testClient));
+      assertEquals(true, Client.all().get(1).contains(firstClient));
     }
+
+
+//saving new clients to DB
+@Test
+public void save_savesIntoDatabase_true() {
+    Client firstClient = new Client("Jon Snow", 710123456);
+    firstClient.save();
+    assertTrue(Client.all().get(0).equals(firstClient));
+}
 
 //assigning and accessing client IDs
     @Test
