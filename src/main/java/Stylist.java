@@ -14,7 +14,6 @@ public class Stylist{
   public Stylist (String name, String speciality){
     this.name = name;
     this.speciality = speciality;
-
   }
 
   //gets name attributes
@@ -55,9 +54,6 @@ public List<Client> getClients(){
     .executeAndFetch(Client.class);
   }
 }
-
-
-
   //gets Stylist id
   public int getId(){
     return id;

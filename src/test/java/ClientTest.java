@@ -82,17 +82,6 @@ public void save_assignsIdToObject(){
       assertTrue(firstClient.getId() > 0);
     }
 
-    //saving stylist id into client
-    // @Test
-    // public void save_savesClientIdIntoDB_true(){
-    //   Client testClient = new Client("Grace", 710123456, 1);
-    //   testClient.save();
-    //   Stylist testStylist = new Stylist("Sansa", "Loctician",  testClient.getId());
-    //   testStylist.save();
-    //   Stylist savedStylist = Stylist.find(testClient.getId());
-    //   assertEquals(savedStylist.getStylistId(), testClient.getId());
-    // }
-
 //locating specific Clients using their IDs
   @Test
   public void find_locatesClientWithId_secondClient(){

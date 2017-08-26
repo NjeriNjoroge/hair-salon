@@ -56,13 +56,6 @@ public void getId_stylistIsCreatedWithId_1(){
   assertTrue(testStylist.getId() > 0);
 }
 
-//clearing previously created Stylis
-// @Test
-// public void clear_clearAllPreviousStylists_0(){
-//   Stylist testStylist = new Stylist("Sansa", "Loctician");
-//   assertEquals(Stylist.all().size(), 0);
-// }
-
 //locating specific Stylists using their IDs
 @Test
 public void find_locatesStylistWithId_testStylist(){
@@ -72,22 +65,6 @@ public void find_locatesStylistWithId_testStylist(){
   firstStylist.save();
   assertEquals(Stylist.find(firstStylist.getId()), firstStylist);
 }
-
-//makes sure Stylists instantiates with empty client List
-//   @Test
-// public void getClients_initiallyReturnsEmptyList_ArrayList() {
-//   Stylist testStylist = new Stylist("Sansa", "Loctician");
-//   assertEquals(0, testStylist.getClient().size());
-// }
-
-//adding client to Stylist
-// @Test
-// public void addClient_addsClientToStylist_true(){
-//   Stylist testStylist = new Stylist("Sansa", "Loctician");
-//   Client goodClient = new Client("Ingrid", 710123456);
-//   testStylist.addClient(goodClient);
-//   assertTrue(testStylist.getClient().contains(goodClient));
-// }
 
 //comparing objects we retrieve from database by overriding equals()
 @Test

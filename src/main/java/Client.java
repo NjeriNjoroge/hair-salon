@@ -9,18 +9,13 @@ public class Client{
   private int stylistId;
   private String name;
   private int phone;
-  //private static List<Client> instances = new ArrayList<Client>();
 
   //Constructor
   public Client (String name, int phone, int stylistId){
     this.name = name;
     this.phone = phone;
     this.stylistId = stylistId;
-    // instances.add(this);
-    // mId = instances.size();
   }
-
-
 
 //returns phone attributes
 public int getPhone(){
