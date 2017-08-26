@@ -8,7 +8,7 @@ public class Stylist{
   private int id;
   private String name;
   private String speciality;
-  private List<Client> mClient;
+  //private List<Client> mClient;
 
   //Constructor
   public Stylist (String name, String speciality){
@@ -26,10 +26,21 @@ public class Stylist{
     return speciality;
   }
 
+//overrides the equals method
+  @Override
+  public boolean equals(Object otherStylist){
+    if (!(otherStylist instanceof Stylist)){
+      return false;
+    } else {
+      Stylist newStylist = (Stylist) otherStylist;
+      return this.getName().equals(newStylist.getName());
+    }
+  }
+
   //returns all database instances of Stylist created
   public static List<Stylist> all(){
     String sql = "SELECT id, name, speciality FROM stylists";
-    try(Connection con = DB.sql2o.open()){
+    try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Stylist.class);
     }
   }
@@ -41,28 +52,34 @@ public class Stylist{
 
 //locating Stylist with their assigned id
   public static Stylist find(int id){
-
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM stylists where id=:id";
+      Stylist stylist = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Stylist.class);
+      return stylist;
+    }
   }
 
 //makes sure Stylists instantiates with empty client List
-public List<Client> getClient(){
-  return mClient;
-}
+// public List<Client> getClient(){
+//   return mClient;
+// }
 
 //adding client to Stylist
-public void addClient(Client client){
-  mClient.add(client);
-}
+// public void addClient(Client client){
+//   mClient.add(client);
+// }
 
 //saving new instance of stylist to database
-public void save(){
+public void save() {
   try(Connection con = DB.sql2o.open()){
     String sql = "INSERT INTO stylists (name, speciality) VALUES (:name, :speciality)";
     this.id = (int) con.createQuery(sql, true)
     .addParameter("name", this.name)
     .addParameter("speciality", this.speciality)
-    .executeUpdate();
-    getKey();
+    .executeUpdate()
+    .getKey();
   }
 }
 }
