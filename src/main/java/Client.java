@@ -1,49 +1,65 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import org.sql2o;
 
 //class
 public class Client{
-  private int mId;
-  private String mName;
-  private int mPhone;
-  private static List<Client> instances = new ArrayList<Client>();
+  private int id;
+  private String name;
+  private int phone;
+  //private static List<Client> instances = new ArrayList<Client>();
 
   //Constructor
   public Client (String name, int phone){
-    mName = name;
-    mPhone = phone;
-    instances.add(this);
-    mId = instances.size();
+    this.name = name;
+    this.phone = phone;
+    // instances.add(this);
+    // mId = instances.size();
   }
+
+
 
 //returns phone attributes
 public int getPhone(){
-  return mPhone;
+  return phone;
 }
 
 //returns name attributes
 public String getName(){
-  return mName;
+  return name;
 }
 
-//returns all Client instances
+//returns all Client created
 public static List<Client> all(){
-  return instances;
+  String sql = "SELECT id, name, phone FROM clients";
+  try(Connection con = DB.sql2o.open()){
+    return con.createQuery(sql).executeAndFetch(Client.class);
+  }
+}
+
+//comparing client objects using .equals
+@override
+public boolean equals(Object otherClient){
+  if (!(otherClient instanceof Client)) {
+    return false;
+  } else {
+    Client newClient = (Client) otherClient;
+    return this.getName().equals(newClient.getName());
+  }
+}
+//
+public List<Stylist> getStylist(){
+
 }
 
 //gets client id
 public int fetchId(){
-  return mId;
-}
-
-//clears all instances of client
-public static void clear(){
-  instances.clear();
+  return id;
 }
 
 //locating Client with their assigned id
 public static Client find(int id){
-  return instances.get(id - 1);
+
 }
 }

@@ -1,8 +1,26 @@
+import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
 public class ClientTest{
 
+//telling the tests to use only this dedicated database
+  @Before
+    public void setUp() {
+      DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", "gnjoroge", "1234");
+    }
+
+
+//clearing the test database
+@After
+public void tearDown() {
+try(Connection con = DB.sql2o.open()) {
+  String deleteClientsQuery = "DELETE FROM clients *;";
+  String deleteStylistsQuery = "DELETE FROM stylists *;";
+  con.createQuery(deleteClientsQuery).executeUpdate();
+  con.createQuery(deleteStylistsQuery).executeUpdate();
+}
+}
 
 //instance of Client
   @Test
@@ -17,6 +35,14 @@ public class ClientTest{
     Client testClient = new Client("Grace", 710123456);
     assertEquals(710123456, testClient.getPhone());
   }
+
+//compares client objects
+@Test
+public void equals_returnsTrueIfNamesAretheSame(){
+  Client testClient = new Client("Grace", 710123456);
+  Client firstClient = new Client("Grace", 710123456);
+  assertTrue(testClient.equals(firstClient));
+}
 
 //returns all new instances of client
     @Test
@@ -34,14 +60,6 @@ public class ClientTest{
       assertEquals(1, firstClient.fetchId());
     }
 
-//clearing previously created Client
-    @Test
-    public void clear_clearAllPreviouslyCreatedClients_0(){
-      Client firstClient = new Client("Jon Snow", 710123456);
-      Client testClient = new Client("Ingrid", 710123456);
-      Client.clear();
-      assertEquals(Client.all().size(), 0);
-    }
 
 //locating specific Clients using their IDs
   @Test
