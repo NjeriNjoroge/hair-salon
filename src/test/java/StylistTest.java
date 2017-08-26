@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class StylistTest{
 
@@ -112,5 +113,24 @@ public void save_assignsIdToStylistObject(){
   assertEquals(testStylist.getId(), savedStylist.getId());
 }
 
+@Test
+public void save_savesIntoDatabase_true(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
+  assertTrue(Stylist.all().get(0).equals(testStylist));
+}
+
+//retrieving all clients saved into a sppecific stylist
+@Test
+public void getClients_retrievesAllClientsFromDatabase_clientsList() {
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
+  Client testClient = new Client("Grace", 710123456, testStylist.getId());
+  testClient.save();
+  Client firstClient = new Client("Arya", 710123456, testStylist.getId());
+  firstClient.save();
+  Client[] clients = new Client[] {testClient, firstClient};
+  assertTrue(testStylist.getClients().containsAll(Arrays.asList(clients)));
+}
 
 }

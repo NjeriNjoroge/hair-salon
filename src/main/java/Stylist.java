@@ -8,12 +8,13 @@ public class Stylist{
   private int id;
   private String name;
   private String speciality;
-  //private List<Client> mClient;
+
 
   //Constructor
   public Stylist (String name, String speciality){
     this.name = name;
     this.speciality = speciality;
+
   }
 
   //gets name attributes
@@ -45,6 +46,18 @@ public class Stylist{
     }
   }
 
+//adds clients to stylist
+public List<Client> getClients(){
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "SELECT * FROM clients where stylistId=:id";
+    return con.createQuery(sql)
+    .addParameter("id", this.id)
+    .executeAndFetch(Client.class);
+  }
+}
+
+
+
   //gets Stylist id
   public int getId(){
     return id;
@@ -61,15 +74,6 @@ public class Stylist{
     }
   }
 
-//makes sure Stylists instantiates with empty client List
-// public List<Client> getClient(){
-//   return mClient;
-// }
-
-//adding client to Stylist
-// public void addClient(Client client){
-//   mClient.add(client);
-// }
 
 //saving new instance of stylist to database
 public void save() {

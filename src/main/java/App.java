@@ -42,14 +42,14 @@ public class App {
       }, new VelocityTemplateEngine());
 
 //creates new stylist when form is submitted
-        post("/stylist", (request, response) -> {
-          Map<String, Object> model = new HashMap<String, Object>();
-          String name = request.queryParams("name");
-          String speciality = request.queryParams("speciality");
-          Stylist newStylist = new Stylist(name, speciality);
-          model.put("template", "templates/success.vtl");
-          return new ModelAndView(model, layout);
-        }, new VelocityTemplateEngine());
+        // post("/stylist", (request, response) -> {
+        //   Map<String, Object> model = new HashMap<String, Object>();
+        //   String name = request.queryParams("name");
+        //   String speciality = request.queryParams("speciality");
+        //   Stylist newStylist = new Stylist(name, speciality);
+        //   model.put("template", "templates/success.vtl");
+        //   return new ModelAndView(model, layout);
+        // }, new VelocityTemplateEngine());
 
 //displays new client form
           get("/stylists/:id/clients/new", (request, response) -> {
@@ -79,16 +79,16 @@ public class App {
     }, new VelocityTemplateEngine());
 
 //adds client to stylist
-  post("/clients", (request, response) -> {
-    Map<String, Object> model = new HashMap<String, Object>();
-    Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
-    String Cname = request.queryParams("name");
-    int Cphone = Integer.parseInt(request.queryParams("phone"));
-    Client newClient = new Client(Cname, Cphone);
-    //stylist.addClient(newClient);
-    model.put("stylist", stylist);
-    model.put("template", "templates/stylist-clients-success.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
+  // post("/clients", (request, response) -> {
+  //   Map<String, Object> model = new HashMap<String, Object>();
+  //   Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
+  //   String Cname = request.queryParams("name");
+  //   int Cphone = Integer.parseInt(request.queryParams("phone"));
+  //   Client newClient = new Client(Cname, Cphone);
+  //   //stylist.addClient(newClient);
+  //   model.put("stylist", stylist);
+  //   model.put("template", "templates/stylist-clients-success.vtl");
+  //   return new ModelAndView(model, layout);
+  // }, new VelocityTemplateEngine());
   }
 }
