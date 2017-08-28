@@ -41,6 +41,13 @@ public class App {
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
+//dislays the client form
+      get("/client/new", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("template", "templates/client-form.vtl");
+        return new ModelAndView(model, layout);
+      }, new VelocityTemplateEngine());
+
 //creates new stylist when form is submitted
         post("/stylist", (request, response) -> {
           Map<String, Object> model = new HashMap<String, Object>();
@@ -161,5 +168,17 @@ post("/stylists/:id", (request, response) -> {
   response.redirect(url);
   return new ModelAndView(model, layout);
 }, new VelocityTemplateEngine());
+
+//deploying
+ProcessBuilder process = new ProcessBuilder();
+ Integer port;
+ if (process.environment().get("PORT") != null) {
+     port = Integer.parseInt(process.environment().get("PORT"));
+ } else {
+     port = 4567;
+ }
+
+setPort(port);
+
   }
 }
