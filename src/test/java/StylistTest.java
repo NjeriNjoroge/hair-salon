@@ -120,4 +120,13 @@ public void delete_deletesStylist_true() {
   assertEquals(null, Stylist.find(myStylistId));
 }
 
+//updating stylist details
+@Test
+public void update_updatesStylistObjects_true(){
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
+  testStylist.update("Carol", "Manicurist");
+  assertEquals("Carol", Stylist.find(testStylist.getId()).getName());
+}
+
 }

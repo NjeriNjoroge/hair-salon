@@ -150,6 +150,16 @@ post("/stylists/stylists/:id/delete", (request, response) -> {
   return new ModelAndView(model, layout);
 }, new VelocityTemplateEngine());
 
-// "/stylists/stylists/:id/delete"
+
+post("/stylists/:id", (request, response) -> {
+  Map<String, Object> model = new HashMap<String, Object>();
+  Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
+  String name = request.queryParams("name");
+  String speciality = request.queryParams("speciality");
+  stylist.update(name, speciality);
+  String url = String.format("/stylists/%d", stylist.getId());
+  response.redirect(url);
+  return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
   }
 }

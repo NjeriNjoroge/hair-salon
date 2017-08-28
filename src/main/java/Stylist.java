@@ -93,4 +93,16 @@ public void delete() {
   }
 }
 
+//updating stylist details
+public void update(String name, String speciality) {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "UPDATE stylists SET name = :name, speciality = :speciality WHERE id = :id";
+    con.createQuery(sql)
+    .addParameter("name", name)
+    .addParameter("speciality", speciality)
+    .addParameter("id", id)
+    .executeUpdate();
+  }
+}
+
 }
