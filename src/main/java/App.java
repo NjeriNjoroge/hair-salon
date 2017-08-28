@@ -141,14 +141,15 @@ return new ModelAndView(model, layout);
 }, new VelocityTemplateEngine());
 
 //deleting stylists from DB
-post("/stylists/:stylist_id/stylists/delete", (request, response) -> {
+post("/stylists/stylists/:id/delete", (request, response) -> {
   Map<String, Object> model = new HashMap<String, Object>();
   Stylist stylist = Stylist.find(Integer.parseInt(request.params("id")));
   stylist.delete();
   model.put("stylist", stylist);
-  model.put("template", "templates/stylist.vtl");
+  model.put("template", "templates/index.vtl");
   return new ModelAndView(model, layout);
 }, new VelocityTemplateEngine());
 
+// "/stylists/stylists/:id/delete"
   }
 }
