@@ -101,4 +101,14 @@ public void save_assignsIdToObject(){
     assertEquals("sansa", Client.find(myClient.getId()).getName());
   }
 
+  //deleting objects in database
+  @Test
+  public void delete_deletesClients_true(){
+    Client myClient = new Client("grace", 7485934, 1);
+    myClient.save();
+    int myClientId = myClient.getId();
+    myClient.delete();
+    assertEquals(null, Client.find(myClientId));
+  }
+
 }

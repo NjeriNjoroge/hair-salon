@@ -110,4 +110,14 @@ public void getClients_retrievesAllClientsFromDatabase_clientsList() {
   assertTrue(testStylist.getClients().containsAll(Arrays.asList(clients)));
 }
 
+//deleting objects from DB
+@Test
+public void delete_deletesStylist_true() {
+  Stylist testStylist = new Stylist("Sansa", "Loctician");
+  testStylist.save();
+  int myStylistId = testStylist.getId();
+  testStylist.delete();
+  assertEquals(null, Stylist.find(myStylistId));
+}
+
 }

@@ -3,10 +3,15 @@
 
 <ul>
   #foreach($client in $stylist.getClients())
-   <li>$client.getName() - $client.getPhone()</li>
+   <li><a href="/clients/$client.getId()">$client.getName() - $client.getPhone()</a></li>
   #end
 </ul>
 
+
+<form action="/stylists/stylists/$stylist.getId()/delete" method="post">
+
+<button type="submit" class="btn btn-danger" id="delete-stylist">Delete </button>
+</form>
 
 <a href="/stylists/$stylist.getId()/clients/new">Add a client</a>
 <a href="/stylists">All stylists</a>

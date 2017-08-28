@@ -105,5 +105,50 @@ post("/client", (request, response) -> {
     return new ModelAndView(model, layout);
   }, new VelocityTemplateEngine());
 
+//route to get update form
+  get("/styles/:style_id/clients/:id", (request, response) -> {
+    Map<String, Object> model = new HashMap<String, Object>();
+    Stylist stylist = Stylist.find(Integer.parseInt(request.params(":stylist_id")));
+    Client client = Client.find(Integer.parseInt(request.params(":id")));
+    model.put("stylist", stylist);
+    model.put("client", client);
+    model.put("template", "templates/client.vtl");
+    return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
+
+//route to process update form
+post("/stylists/:stylist_id/clients/:id", (request, response) -> {
+  Map<String, Object> model = new HashMap<String, Object>();
+  Client client = Client.find(Integer.parseInt(request.params(":id")));
+  String name = request.queryParams("name");
+  int phone = Integer.parseInt(request.queryParams("phone"));
+  Stylist stylist = Stylist.find(client.getStylistId());
+  client.update(name, phone);
+  String url = String.format("/clients/%d", client.getId());
+  response.redirect(url);
+  return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
+
+//deleting clients from DB
+post("/stylists/:stylist_id/clients/:id/delete", (request, response) -> {
+Map<String, Object> model = new HashMap<String, Object>();
+Client client = Client.find(Integer.parseInt(request.params("id")));
+Stylist stylist = Stylist.find(client.getStylistId());
+client.delete();
+model.put("stylist", stylist);
+model.put("template", "templates/stylist.vtl");
+return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
+
+//deleting stylists from DB
+post("/stylists/:stylist_id/stylists/delete", (request, response) -> {
+  Map<String, Object> model = new HashMap<String, Object>();
+  Stylist stylist = Stylist.find(Integer.parseInt(request.params("id")));
+  stylist.delete();
+  model.put("stylist", stylist);
+  model.put("template", "templates/stylist.vtl");
+  return new ModelAndView(model, layout);
+}, new VelocityTemplateEngine());
+
   }
 }

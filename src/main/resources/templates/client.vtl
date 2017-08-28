@@ -1,4 +1,23 @@
 <h1>$client.getName()</h1>
 <p>$client.getPhone()</p>
 
+<h2>Edit Client Details</h2>
+<form action="/stylists/$client.getStylistId()/clients/$client.getId()" method="post">
+
+<label for="name">Name</label>
+<input type="text" name="name" id="name">
+
+<label for="phone">Phone Number</label>
+<input type="text" name="phone" id="phone">
+
+<button type="submit" class="btn btn-info" >Update</button>
+</form>
+
+<form action="/stylists/$client.getStylistId()/clients/$client.getId()/delete" method="post">
+
+<button type="submit" class="btn btn-danger" id="delete-client">Delete client</button>
+</form>
+
+<a href="/stylists/$stylist.getId()">Return to $stylist.getName()</a>
+
 <a href="/clients">All clients</a>

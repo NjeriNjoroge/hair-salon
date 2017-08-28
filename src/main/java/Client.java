@@ -94,5 +94,15 @@ public void update(String name, int phone){
   }
 }
 
+//deleting objects from DB
+public void delete() {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "DELETE FROM clients WHERE id = :id";
+    con.createQuery(sql)
+    .addParameter("id", id)
+    .executeUpdate();
+  }
+}
+
 
 }
